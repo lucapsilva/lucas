@@ -1,0 +1,27 @@
+name: Validação do Projeto
+on:
+  push:
+jobs:
+  build:
+     runs-on: ubuntu-latest
+     steps:
+           - run: echo "Iniciando o workflow"
+           - name: Checkout
+             uses: actions/checkout@v5
+           - name: Lista arquivos
+             run: ls ${{ github.workspace }}
+           - name: Exibir repositório e usuário
+             run: |
+               echo "Repositório: ${{ github.repository }}"
+               echo "Usuário que iniciou a execução: ${{ github.actor }}"
+           - name: Verificar README.md
+             run: |
+               if [ ! -f README.md ]; then
+                 echo "Erro: o arquivo README.md não foi encontrado."
+                 exit 1
+               fi
+               echo "README.md encontrado."
+           - name: Status
+             run: echo "${{ job.status }}"
+           - name: Mensagem de conclusão
+             run: echo "Validação concluída."
