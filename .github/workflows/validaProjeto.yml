@@ -1,0 +1,14 @@
+name: Primeiro Workflow
+on:
+  push:
+jobs:
+  build:
+     runs-on: ubuntu-latest
+     steps:
+           - run: echo "Iniciando o workflow"
+           - name: Checkout
+             uses: actions/checkout@v5
+           - name: Exibe nome repositório
+             run:  ${{ github.repository }}
+           - name: Usuario
+             run: echo ${{ github.actor }}
